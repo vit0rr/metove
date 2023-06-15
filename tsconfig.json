@@ -8,7 +8,7 @@
     "checkJs": false,
     "jsx": "preserve",
     "incremental": true,
-    "noEmit": true,
+    "noEmit": false,
 
     /* Strict Type-Checking Options */
     "strict": true,
@@ -27,10 +27,7 @@
       /* Support absolute /imports/* with a leading '/' */
       "/*": ["*"],
       /* Pull in type declarations for Meteor packages from either zodern:types or @types/meteor packages */
-      "meteor/*": [
-        "node_modules/@types/meteor/*",
-        ".meteor/local/types/packages.d.ts"
-      ]
+      "meteor/*": ["node_modules/@types/meteor/*", ".meteor/local/types/packages.d.ts"]
     },
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -38,8 +35,6 @@
     "esModuleInterop": true,
     "preserveSymlinks": true
   },
-  "exclude": [
-    "./.meteor/**",
-    "./packages/**"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", "**/*.json"],
+  "exclude": ["./.meteor/**", "./packages/**"]
 }

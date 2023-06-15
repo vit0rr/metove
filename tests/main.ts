@@ -1,5 +1,6 @@
-import { Meteor } from 'meteor/meteor';
 import assert from 'assert';
+
+import { Meteor } from 'meteor/meteor';
 
 describe('metove', function () {
   it('package.json has correct name', async function () {
