@@ -1,9 +1,14 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 
 import { ContactsCollection } from '../db/ContactsCollection';
 
 Meteor.methods({
-  'contacts.insert'(name: string, email: string, imageUrl: string,) {
+  'contacts.insert'(name: string, email: string, imageUrl: string) {
+    check(name, String);
+    check(email, String);
+    check(imageUrl, String);
+
     if (!name) {
       throw new Meteor.Error('Name is required');
     }
@@ -22,5 +27,10 @@ Meteor.methods({
       imageUrl,
       createdAt: new Date(),
     });
+  },
+  'contacts.remove'(contactId: string) {
+    check(contactId, String);
+
+    ContactsCollection.remove(contactId);
   },
 });
