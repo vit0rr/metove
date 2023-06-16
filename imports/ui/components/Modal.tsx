@@ -46,15 +46,13 @@ export const Modal = ({
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
                 <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                  <div className="sm:flex sm:items-start">
-                    <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                      <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                        {title}
-                      </Dialog.Title>
-                      <div className="mt-2">
-                        {errorMessage && <h3 className="text-sm font-medium text-red-800">{errorMessage}</h3>}
-                        {body}
-                      </div>
+                  <div>
+                    <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
+                      {title}
+                    </Dialog.Title>
+                    <div className="mt-2">
+                      {errorMessage && <h3 className="text-sm font-medium text-red-800">{errorMessage}</h3>}
+                      {body}
                     </div>
                   </div>
                 </div>

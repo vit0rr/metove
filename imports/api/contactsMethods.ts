@@ -7,7 +7,6 @@ Meteor.methods({
   'contacts.insert'(name: string, email: string, imageUrl: string, walletId: string) {
     check(name, String);
     check(email, String);
-    check(imageUrl, String);
     check(walletId, String);
 
     if (!name) {
@@ -16,10 +15,6 @@ Meteor.methods({
 
     if (!email) {
       throw new Meteor.Error('Email is required');
-    }
-
-    if (!imageUrl) {
-      throw new Meteor.Error('Image URL is required');
     }
 
     if (!walletId) {

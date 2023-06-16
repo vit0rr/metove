@@ -5,6 +5,7 @@ import { Meteor } from 'meteor/meteor';
 import { useTracker } from 'meteor/react-meteor-data';
 
 import { ContactsCollection } from '../db/ContactsCollection';
+import { Loading } from './components/Loading';
 
 export const ContactList = () => {
   const { contacts, isLoading } = useTracker(() => {
@@ -32,7 +33,7 @@ export const ContactList = () => {
         <li className="py-4 flex items-center justify-between space-x-3">
           <div className="min-w-0 flex-1 flex items-center space-x-3">
             <div className="flex-shrink-0">
-              <img className="h-10 w-10 rounded-full" src={contact.imageUrl} alt="" />
+              {contact.imageUrl && (<img className="h-10 w-10 rounded-full" src={contact.imageUrl} alt="" />)}
             </div>
             <div className="min-w-0 flex-1">
               <p className="text-sm font-medium text-gray-900 truncate">{contact.name}</p>
@@ -59,13 +60,7 @@ export const ContactList = () => {
       <div className="mt-10">
         <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Contact List</h3>
         <ul className="mt-4 border-t border-b border-gray-200 divide-y divide-gray-200">
-          {isLoading && (
-            <div>
-              <div className="mt-10">
-                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide ">Loading...</h3>
-              </div>
-            </div>
-          )}
+          {isLoading && <Loading />}
           {contacts.map(
             (
               contact: { name: string; email: string; imageUrl: string; walletId: string; _id: string },
