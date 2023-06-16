@@ -51,7 +51,9 @@ export const Wallet = () => {
       },
       (errorResponse) => {
         if (errorResponse) {
-          setErrorMessage(errorResponse.error);
+          errorResponse.details?.forEach((error) => {
+            setErrorMessage(error.message);
+          });
         } else {
           setOpen(false);
           // TODO: create a function to clear the form
