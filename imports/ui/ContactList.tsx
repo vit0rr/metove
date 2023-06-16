@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 
 import { Meteor } from 'meteor/meteor';
+// @ts-ignore
 import { useTracker } from 'meteor/react-meteor-data';
 
 import { ContactsCollection } from '../db/ContactsCollection';
@@ -26,7 +27,7 @@ export const ContactList = () => {
   };
 
   const ContactItem = memo(
-    ({ contact }: { contact: { name: string; email: string; imageUrl: string; _id: string } }) => {
+    ({ contact }: { contact: { name: string; email: string; imageUrl: string; walletId: string; _id: string } }) => {
       return (
         <li className="py-4 flex items-center justify-between space-x-3">
           <div className="min-w-0 flex-1 flex items-center space-x-3">
@@ -36,6 +37,7 @@ export const ContactList = () => {
             <div className="min-w-0 flex-1">
               <p className="text-sm font-medium text-gray-900 truncate">{contact.name}</p>
               <p className="text-sm font-medium text-gray-500 truncate">{contact.email}</p>
+              <p className="text-sm font-medium text-gray-500 truncate">{contact.walletId}</p>
             </div>
             <div>
               <a
@@ -65,7 +67,10 @@ export const ContactList = () => {
             </div>
           )}
           {contacts.map(
-            (contact: { name: string; email: string; imageUrl: string; _id: string }, contactIdx: string) => (
+            (
+              contact: { name: string; email: string; imageUrl: string; walletId: string; _id: string },
+              contactIdx: string,
+            ) => (
               <ContactItem key={contactIdx} contact={contact} />
             ),
           )}
