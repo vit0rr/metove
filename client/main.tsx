@@ -5,8 +5,8 @@ import { Meteor } from 'meteor/meteor';
 
 import { App } from '/imports/ui/App';
 
-import '../imports/api/contactsMethods';
-import '../imports/api/transactionMethods';
+import '../imports/api/methods/contactsMethods';
+import '../imports/api/methods/transactionMethods';
 
 Meteor.startup(() => {
   const container = document.getElementById('react-target');

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
-import { ContactsCollection } from '../db/ContactsCollection';
+import { ContactsCollection } from '../../db/ContactsCollection';
 
 Meteor.methods({
   'contacts.insert'(name: string, email: string, imageUrl: string, walletId: string) {
