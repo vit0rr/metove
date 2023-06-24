@@ -3,10 +3,10 @@ import { createRoot } from 'react-dom/client';
 
 import { Meteor } from 'meteor/meteor';
 
-import { App } from '/imports/ui/App';
+import { App } from '/ui/App';
 
-import '../imports/api/methods/contactsMethods';
-import '../imports/api/methods/transactionMethods';
+import '../api/methods/contactsMethods';
+import '../api/methods/transactionMethods';
 
 Meteor.startup(() => {
   const container = document.getElementById('react-target');
