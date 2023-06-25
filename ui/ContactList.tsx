@@ -11,7 +11,7 @@ export const ContactList = () => {
   const { contacts, isLoading } = useTracker(() => {
     const noDataAvailable = { contacts: [] };
 
-    const handler = Meteor.subscribe('contacts');
+    const handler = Meteor.subscribe('myContacts');
     const isLoading = !handler.ready();
     if (!handler.ready()) {
       return { ...noDataAvailable, isLoading };

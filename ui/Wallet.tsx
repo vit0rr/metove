@@ -3,6 +3,8 @@ import React from 'react';
 // @ts-ignore
 import { useTracker } from 'meteor/react-meteor-data';
 
+import { useLoggedUser } from 'meteor/quave:logged-user-react';
+
 import { Modal } from './components/Modal';
 import { SelectContact } from './components/SelectContact';
 import { Meteor } from 'meteor/meteor';
@@ -11,12 +13,14 @@ import { Loading } from './components/Loading';
 import { WalletsCollection } from '../db/WalletsCollection';
 
 export const Wallet = () => {
+  const { loggedUser } = useLoggedUser();
+
   const { contacts, wallet, isLoadingContacts, isLoadingWallets } = useTracker(() => {
     const noDataAvailableContacts = { contacts: [] };
     const noDataAvailableWallets = { wallets: [] };
 
-    const handlerContacts = Meteor.subscribe('contacts');
-    const handlerWallets = Meteor.subscribe('wallets');
+    const handlerContacts = Meteor.subscribe('myContacts');
+    const handlerWallets = Meteor.subscribe('myWallet');
 
     const isLoadingContacts = !handlerContacts.ready();
     if (!handlerContacts.ready()) {
@@ -37,7 +41,7 @@ export const Wallet = () => {
   const [open, setOpen] = React.useState(false);
   const [isTransferring, setIsTransferring] = React.useState(false);
   const [amount, setAmount] = React.useState(0);
-  const [destinationWallet, setDestinationWallet] = React.useState({});
+  const [destinationContact, setDestinationContact] = React.useState({});
   const [errorMessage, setErrorMessage] = React.useState('');
 
   const addTransaction = () => {
@@ -46,7 +50,7 @@ export const Wallet = () => {
       {
         isTransferring,
         sourceWalletId: wallet._id,
-        destinationWalletId: destinationWallet?.walletId || '',
+        destinationContactId: destinationContact?._id || '',
         amount: Number(amount),
       },
       (errorResponse) => {
@@ -61,7 +65,7 @@ export const Wallet = () => {
         } else {
           setOpen(false);
           // TODO: create a function to clear the form
-          setDestinationWallet({});
+          setDestinationContact({});
           setAmount(0);
           setErrorMessage('');
         }
@@ -82,8 +86,9 @@ export const Wallet = () => {
       <div className="flex font-sans shadow-md my-10">
         <form className="flex-auto p-6">
           <div className="flex flex-wrap">
-            <div className="w-full flex-none text-sm font-medium text-gray-500">Main account</div>
-            <div className="w-full flex-none text-sm font-medium text-gray-700 mt-2">Wallet ID: </div>
+            <div className="w-full flex-none text-sm font-medium text-gray-700 mt-2">Email: </div>
+            <h1 className="flex-auto text-lg font-semibold text-gray-900">{loggedUser?.email}</h1>
+            <div className="w-full flex-none text-sm font-medium text-gray-700 mt-2">Wallet id: </div>
             <h1 className="flex-auto text-lg font-semibold text-gray-900">{wallet._id}</h1>
             <div className="text-lg font-bold text-gray-700">{`${wallet.balance} ${wallet.currency}`}</div>
           </div>
@@ -127,8 +132,8 @@ export const Wallet = () => {
                 <SelectContact
                   title={'Destination wallet'}
                   contacts={contacts}
-                  contact={destinationWallet}
-                  setContact={setDestinationWallet}
+                  contact={destinationContact}
+                  setContact={setDestinationContact}
                 />
               </div>
             )}

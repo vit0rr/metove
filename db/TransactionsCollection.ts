@@ -22,10 +22,6 @@ TransactionsCollection.before.insert(function (userId, transactionDocument) {
     WalletsCollection.update(transactionDocument.sourceWalletId, {
       $inc: { balance: -transactionDocument.amount },
     });
-
-    WalletsCollection.update(transactionDocument.destinationWalletId, {
-      $inc: { balance: transactionDocument.amount },
-    });
   }
 
   if (transactionDocument.type === ADD_TYPE) {
@@ -41,6 +37,31 @@ TransactionsCollection.before.insert(function (userId, transactionDocument) {
   }
 });
 
+TransactionsCollection.before.remove(function (userId, transactionDocument) {
+  if (transactionDocument.type === TRANSFER_TYPE) {
+    const sourceWallet = WalletsCollection.findOne(
+      transactionDocument.sourceWalletId
+    );
+    if (!sourceWallet) {
+      throw new Meteor.Error('Source wallet not found.');
+    }
+    WalletsCollection.update(transactionDocument.sourceWalletId, {
+      $inc: { balance: transactionDocument.amount },
+    });
+  }
+  if (transactionDocument.type === ADD_TYPE) {
+    const sourceWallet = WalletsCollection.findOne(
+      transactionDocument.sourceWalletId
+    );
+    if (!sourceWallet) {
+      throw new Meteor.Error('Source wallet not found.');
+    }
+    WalletsCollection.update(transactionDocument.sourceWalletId, {
+      $inc: { balance: -transactionDocument.amount },
+    });
+  }
+});
+
 const TransactionsSchema = new SimpleSchema({
   type: {
     type: String,
@@ -49,7 +70,7 @@ const TransactionsSchema = new SimpleSchema({
   sourceWalletId: {
     type: String,
   },
-  destinationWalletId: {
+  destinationContactId: {
     type: String,
     optional: true,
   },
@@ -59,6 +80,9 @@ const TransactionsSchema = new SimpleSchema({
   },
   createdAt: {
     type: Date,
+  },
+  userId: {
+    type: String,
   },
 });
 

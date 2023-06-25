@@ -20,6 +20,9 @@ const ContactsSchema = new SimpleSchema({
   createdAt: {
     type: Date,
   },
+  userId: {
+    type: String,
+  },
 });
 
 // @ts-ignore

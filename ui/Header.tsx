@@ -43,7 +43,7 @@ export const Header = () => {
               onClick={() => navigate(RoutePaths.SIGN_UP)}
               className="text-sm font-semibold leading-6 text-white hover:cursor-pointer"
             >
-              Sign up <span aria-hidden="true">&rarr;</span>
+             Sign In/Sign up <span aria-hidden="true">&rarr;</span>
             </a>
           )}
           {!isLoadingLoggedUser && loggedUser && (

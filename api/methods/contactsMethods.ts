@@ -5,6 +5,11 @@ import { ContactsCollection } from '../../db/ContactsCollection';
 
 Meteor.methods({
   'contacts.insert'(name: string, email: string, imageUrl: string, walletId: string) {
+    const { userId } = this;
+    if (!userId) {
+      throw new Meteor.Error('Not authorized.');
+    }
+
     check(name, String);
     check(email, String);
     check(walletId, String);
@@ -27,6 +32,7 @@ Meteor.methods({
       imageUrl,
       walletId,
       createdAt: new Date(),
+      userId,
     });
   },
   'contacts.remove'(contactId: string) {
