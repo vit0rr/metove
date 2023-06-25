@@ -16,8 +16,8 @@ It is using [Meteor](https://www.meteor.com/), TypeScript and TailwindCSS.
 
 ### Screenshots
 
-#### Sign up ![sing-up](./images/sign-up.png)
+![sing-up](./images/sign-up.png)
 
-#### Sign in ![sing-in](./images/sign-in.png)
+![sing-in](./images/sign-in.png)
 
-#### Home ![sing-in](./images/home.png)
+![sing-in](./images/home.png)
