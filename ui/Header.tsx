@@ -7,10 +7,7 @@ export const Header = () => {
 
   return (
     <header className="bg-indigo-600">
-      <nav
-        className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
-        aria-label="Global"
-      >
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
         <div className="flex lg:hidden">
           <button
             type="button"
@@ -22,28 +19,17 @@ export const Header = () => {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
-          <a href="#" className="text-sm font-semibold leading-6 text-white">
-            Features
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-white">
-            Marketplace
-          </a>
-          <a href="#" className="text-sm font-semibold leading-6 text-white">
-            Company
+          <a href="/" className="text-lg font-semibold leading-6 text-white">
+            Metove
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <a href="#" className="text-sm font-semibold leading-6 text-white">
-            Log in <span aria-hidden="true">&rarr;</span>
+            Sign up <span aria-hidden="true">&rarr;</span>
           </a>
         </div>
       </nav>
-      <Dialog
-        as="div"
-        className="lg:hidden"
-        open={mobileMenuOpen}
-        onClose={setMobileMenuOpen}
-      >
+      <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-10" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
