@@ -13,3 +13,11 @@ It is using [Meteor](https://www.meteor.com/), TypeScript and TailwindCSS.
 
 - Clone the repository
 - Run `meteor`
+
+### Screenshots
+
+#### Sign up ![sing-up](./images/sign-up.png)
+
+#### Sign in ![sing-in](./images/sign-in.png)
+
+#### Home ![sing-in](./images/home.png)
