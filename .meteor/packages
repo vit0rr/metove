@@ -23,3 +23,5 @@ zodern:types            # Pull in type declarations from other Meteor packages
 juliancwirko:postcss
 aldeed:collection2
 matb33:collection-hooks
+accounts-password
+quave:logged-user-react

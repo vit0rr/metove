@@ -1,9 +1,20 @@
+import React, { useState } from 'react';
+import { Meteor } from 'meteor/meteor';
+
+import { useNavigate } from 'react-router-dom';
+
 import { Dialog, Popover } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import React, { useState } from 'react';
+
+import { RoutePaths } from './Router';
+
+import { useLoggedUser } from 'meteor/quave:logged-user-react';
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const { loggedUser, isLoadingLoggedUser } = useLoggedUser();
+  const navigate = useNavigate();
 
   return (
     <header className="bg-indigo-600">
@@ -19,14 +30,30 @@ export const Header = () => {
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
-          <a href="/" className="text-lg font-semibold leading-6 text-white">
+          <a
+            onClick={() => navigate(RoutePaths.HOME)}
+            className="text-lg font-semibold leading-6 text-white hover:cursor-pointer"
+          >
             Metove
           </a>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm font-semibold leading-6 text-white">
-            Sign up <span aria-hidden="true">&rarr;</span>
-          </a>
+          {!isLoadingLoggedUser && !loggedUser && (
+            <a
+              onClick={() => navigate(RoutePaths.SIGN_UP)}
+              className="text-sm font-semibold leading-6 text-white hover:cursor-pointer"
+            >
+              Sign up <span aria-hidden="true">&rarr;</span>
+            </a>
+          )}
+          {!isLoadingLoggedUser && loggedUser && (
+            <a
+              onClick={() => Meteor.logout()}
+              className="text-sm font-semibold leading-6 text-white hover:cursor-pointer"
+            >
+              Log Out <span aria-hidden="true">&rarr;</span>
+            </a>
+          )}
         </div>
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
