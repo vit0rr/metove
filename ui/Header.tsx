@@ -16,6 +16,16 @@ export const Header = () => {
   const { loggedUser, isLoadingLoggedUser } = useLoggedUser();
   const navigate = useNavigate();
 
+  const handleLogout = () => {
+    Meteor.logout();
+    setMobileMenuOpen(false);
+  };
+
+  const handleNavigation = (route) => {
+    navigate(route);
+    setMobileMenuOpen(false);
+  };
+
   return (
     <header className="bg-indigo-600">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -26,7 +36,7 @@ export const Header = () => {
             onClick={() => setMobileMenuOpen(true)}
           >
             <span className="sr-only">Open main menu</span>
-            <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            <Bars3Icon className="h-6 w-6 text-white" aria-hidden="false" />
           </button>
         </div>
         <Popover.Group className="hidden lg:flex lg:gap-x-12">
@@ -43,7 +53,7 @@ export const Header = () => {
               onClick={() => navigate(RoutePaths.SIGN_UP)}
               className="text-sm font-semibold leading-6 text-white hover:cursor-pointer"
             >
-             Sign In/Sign up <span aria-hidden="true">&rarr;</span>
+              Sign In/Sign up <span aria-hidden="true">&rarr;</span>
             </a>
           )}
           {!isLoadingLoggedUser && loggedUser && (
@@ -57,20 +67,11 @@ export const Header = () => {
         </div>
       </nav>
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
-        <div className="fixed inset-0 z-10" />
-        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-          <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                alt=""
-              />
-            </a>
+        <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-indigo-600 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="mt-6 flex items-center justify-between">
             <button
               type="button"
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-mx-3 block rounded-md px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-50"
               onClick={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Close menu</span>
@@ -79,34 +80,26 @@ export const Header = () => {
           </div>
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
-              <div className="space-y-2 py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50"
-                >
-                  Features
-                </a>
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50"
-                >
-                  Marketplace
-                </a>
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50"
-                >
-                  Company
-                </a>
-              </div>
-              <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-50"
-                >
-                  Log in
-                </a>
-              </div>
+              {!isLoadingLoggedUser && (
+                <div className="py-6">
+                  {!loggedUser && (
+                    <a
+                      onClick={() => handleNavigation(RoutePaths.SIGN_UP)}
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-50"
+                    >
+                      Sign In/Sign Up
+                    </a>
+                  )}
+                  {loggedUser && (
+                    <a
+                      onClick={handleLogout}
+                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-white hover:bg-gray-50"
+                    >
+                      Log Out
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
           </div>
         </Dialog.Panel>
