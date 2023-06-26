@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { WalletsCollection } from '/db/WalletsCollection';
+import { WalletsCollection } from '../../db/WalletsCollection';
 
 Meteor.publish('myWallet', function publishWallets() {
   const { userId } = this;

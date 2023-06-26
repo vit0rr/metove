@@ -1,5 +1,5 @@
 import { Accounts } from 'meteor/accounts-base';
-import { WalletsCollection } from '/db/WalletsCollection';
+import { WalletsCollection } from '../db/WalletsCollection';
 
 Accounts.onCreateUser((options, user) => {
   const customizedUser = { ...user };

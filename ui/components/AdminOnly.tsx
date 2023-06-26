@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { useLoggedUser } from 'meteor/quave:logged-user-react';
-import { Loading } from './Loading';
 import { RoutePaths } from '../Router';
 import { Meteor } from 'meteor/meteor';
 

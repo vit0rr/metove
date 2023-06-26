@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import { Meteor } from 'meteor/meteor';
 
-import { App } from '/ui/App';
+import { App } from '../ui/App';
 
 import '../api/methods/contactsMethods';
 import '../api/methods/transactionMethods';

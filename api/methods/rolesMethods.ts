@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { WalletsRoles } from '/infra/Roles';
+import { WalletsRoles } from '../../infra/Roles';
 import { Roles } from 'meteor/alanning:roles';
 
 Meteor.methods({
